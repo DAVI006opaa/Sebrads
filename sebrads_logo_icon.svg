@@ -1,0 +1,6 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="98" fill="#0A1943"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#C9A227" stroke-width="1.6"/>
+  <circle cx="100" cy="100" r="78" fill="none" stroke="#C9A227" stroke-width="0.5" opacity="0.55"/>
+  <text x="100" y="140" font-family="Fraunces, Georgia, 'Iowan Old Style', serif" font-style="italic" font-weight="500" font-size="120" fill="#E3C46B" text-anchor="middle">S</text>
+</svg>

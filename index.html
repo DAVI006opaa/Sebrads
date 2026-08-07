@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>document.documentElement.className+=" js";</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEBRADS — Engenharia de Dados e Sistemas de Decisão</title>
+<meta name="description" content="A SEBRADS integra registro histórico e dado em tempo real para que organizações que operam sob pressão decidam com vantagem. Rio de Janeiro, Brasil.">
+<meta property="og:title" content="SEBRADS — Engenharia de Dados e Sistemas de Decisão">
+<meta property="og:description" content="A SEBRADS integra registro histórico e dado em tempo real para que organizações que operam sob pressão decidam com vantagem. Rio de Janeiro, Brasil.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A1943">
+<meta name="color-scheme" content="dark light">
+<meta name="author" content="SEBRADS">
+<link rel="canonical" href="https://sebrads.com.br/">
+<link rel="apple-touch-icon" href="assets/sebrads_logo_icon.png">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="SEBRADS">
+<meta property="og:url" content="https://sebrads.com.br/">
+<meta property="og:image" content="https://sebrads.com.br/assets/sebrads_logo_horizontal.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="360">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow, noarchive, noimageindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/sebrads_logo_icon.png">
+
+<!--
+  SEBRADS — site institucional.
+
+  Imagens: as duas fotos desta página são arquivos reais em assets/.
+  Não usar legenda sem imagem correspondente.
+
+  Acabamento: ver "CAMADA DE ACABAMENTO" ao final do <style> — conteúdo
+  visível por padrão, foco de teclado, movimento reduzido e folha de impressão.
+  Ritmo vertical controlado pela variável --sec.
+-->
+<style>
+  :root{
+    --royal:#0B1E52;
+    --royal-2:#122A6B;
+    --royal-3:#0A1943;
+    --bone:#F7F3EA;
+    --bone-2:#EDE6D6;
+    --gold:#C9A227;
+    --gold-light:#E3C46B;
+    --gold-deep:#8B6F1C;
+    --line:rgba(247,243,234,0.14);
+    --line-dark:rgba(11,30,82,0.14);
+    --charcoal:#12193A;
+    --muted:#9BA2BE;
+    --muted-dark:#4E5578;
+    --serif: 'Fraunces', Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+    --ease: cubic-bezier(.22,1,.36,1);
+    --sec: 130px;   /* ritmo vertical base — todas as seções derivam daqui */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--royal-3);color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-weight:300;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 48px;}
+  a{color:inherit;text-decoration:none;}
+  .reveal{transition:opacity .7s var(--ease), transform .7s var(--ease);}
+
+  /* progress bar */
+  #progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--gold);z-index:80;transition:width .1s linear;}
+
+  /* underline-hover utility */
+  .u-link{position:relative;}
+  .u-link::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease);}
+  .u-link:hover::after{transform:scaleX(1);transform-origin:left;}
+
+  header{position:sticky;top:0;z-index:70;background:transparent;border-bottom:1px solid transparent;transition:background .3s var(--ease), border-color .3s var(--ease);}
+  header.scrolled{background:rgba(10,25,67,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;}
+  .wordmark{font-family:var(--serif);font-size:20px;letter-spacing:0.14em;font-weight:400;color:var(--bone);}
+  .wordmark span{color:var(--gold-light);}
+  .navlinks{display:flex;gap:38px;font-size:12.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+  .navlinks a{color:var(--muted);}
+  .navlinks a:hover{color:var(--bone);}
+  .navcta{border:1px solid var(--gold);color:var(--gold-light);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;transition:background .25s, color .25s;}
+  .navcta:hover{background:var(--gold);color:var(--royal-3);}
+  .burger{display:none;width:26px;height:18px;position:relative;cursor:pointer;}
+  .burger span{position:absolute;left:0;right:0;height:1px;background:var(--bone);transition:transform .3s var(--ease), opacity .3s;}
+  .burger span:nth-child(1){top:0;}
+  .burger span:nth-child(2){top:8px;}
+  .burger span:nth-child(3){top:16px;}
+  #nav-toggle{display:none;}
+  .mobile-panel{display:none;}
+
+  .hero{
+    padding:196px 0 120px;text-align:center;position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 18% -8%, rgba(201,162,39,0.10), transparent 45%),
+      radial-gradient(circle at 82% 0%, rgba(18,42,107,0.55), transparent 55%),
+      var(--royal-3);
+  }
+  .hero .eyebrow{font-size:11.5px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold-light);margin-bottom:34px;opacity:.85;}
+  .kicker{font-size:12.5px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-light);margin-bottom:30px;}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:68px;line-height:1.08;letter-spacing:-0.01em;color:var(--bone);max-width:920px;margin:0 auto;}
+  .hero h1 em{font-style:italic;color:var(--gold-light);}
+  .hero p.lede{font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.7;color:var(--muted);margin:36px auto 0;max-width:540px;}
+  .hero-actions{margin-top:50px;display:flex;gap:30px;align-items:center;justify-content:center;}
+  .btn-primary{background:var(--gold);color:var(--royal-3);font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;padding:16px 32px;font-weight:600;transition:transform .3s var(--ease), background .3s;display:inline-block;}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+  .btn-ghost{font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--bone);border-bottom:1px solid var(--muted-dark);padding-bottom:4px;}
+  .btn-ghost:hover{border-color:var(--gold-light);color:var(--gold-light);}
+  section.light .btn-ghost{color:var(--charcoal);border-bottom-color:var(--muted-dark);}
+
+  /* MANIFESTO — quebra tipográfica full-bleed (sem dependência de imagem) */
+  .manifesto{
+    position:relative;padding:calc(var(--sec) * .88) 0;
+    background-color:var(--royal-3);
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(201,162,39,0.09), transparent 42%),
+      linear-gradient(118deg, #14245F 0%, #0A1943 58%, #081533 100%);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .manifesto .rule{width:52px;height:1px;background:var(--gold);margin-bottom:34px;}
+  .manifesto blockquote{font-family:var(--serif);font-weight:300;font-size:36px;line-height:1.45;color:var(--bone);max-width:780px;letter-spacing:-0.01em;}
+  .manifesto blockquote em{font-style:italic;color:var(--gold-light);}
+  .manifesto .src{margin-top:30px;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);}
+
+  /* editorial section head with index number */
+  .idx-head{display:flex;align-items:baseline;gap:22px;margin-bottom:56px;}
+  .idx-head .idx{font-family:var(--mono);font-size:13px;color:var(--gold-light);letter-spacing:0.02em;}
+  section.light .idx-head .idx{color:var(--gold-deep);}
+  .idx-head h2{font-family:var(--serif);font-size:34px;font-weight:400;}
+  .idx-head .spacer{flex:1;border-bottom:1px solid var(--line);margin-bottom:8px;}
+  section.light .idx-head .spacer{border-color:var(--line-dark);}
+  .idx-head .sub{font-size:13px;color:var(--muted);max-width:280px;text-align:right;line-height:1.7;}
+  section.light .idx-head .sub{color:var(--muted-dark);}
+
+  .philosophy{padding:var(--sec) 0;}
+  .philosophy .grid{display:grid;grid-template-columns:260px 1fr;gap:70px;}
+  .label-col{font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-deep);}
+  .philosophy .pol{font-size:15px;line-height:1.9;color:var(--muted-dark);margin-bottom:20px;max-width:640px;}
+  .philosophy .pol:last-child{margin-bottom:0;}
+  .philosophy blockquote{font-family:var(--serif);font-weight:400;font-size:31px;line-height:1.5;color:var(--charcoal);letter-spacing:-0.005em;}
+  .philosophy .attribution{margin-top:28px;font-size:13.5px;color:var(--muted-dark);letter-spacing:0.02em;line-height:1.85;}
+  .philosophy .integracao{margin-top:34px;font-family:var(--serif);font-style:italic;font-size:16.5px;line-height:1.85;color:var(--gold-deep);border-left:2px solid var(--gold);padding-left:24px;max-width:600px;}
+
+
+  /* O QUE FAZEMOS — grade editorial 2x2 */
+  .capacidades{padding:var(--sec) 0;}
+  .cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-dark);
+            border-top:1px solid var(--line-dark);border-left:1px solid var(--line-dark);}
+  .cap-item{background:var(--bone);padding:46px 44px 50px;}
+  .cap-item .cn{font-family:var(--mono);font-size:12px;color:var(--gold-deep);margin-bottom:26px;letter-spacing:0.04em;}
+  .cap-item h3{font-family:var(--serif);font-size:23px;font-weight:400;color:var(--charcoal);
+               line-height:1.35;margin-bottom:16px;letter-spacing:-0.005em;}
+  .cap-item p{font-size:14.5px;line-height:1.85;color:var(--muted-dark);}
+
+  /* ONDE ATUAMOS — três colunas com filete */
+  .dominios{padding:var(--sec) 0;}
+  .dom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:52px;}
+  .dom{border-top:1px solid var(--gold);padding-top:26px;}
+  .dom h4{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--charcoal);
+          line-height:1.4;margin-bottom:14px;}
+  .dom p{font-size:14px;line-height:1.85;color:var(--muted-dark);}
+
+  /* ORIGEM — trajetória em prosa curta, sem linha do tempo */
+  .historia{padding:var(--sec) 0;}
+  .origem{display:grid;grid-template-columns:260px 1fr;gap:70px;align-items:start;}
+  .origem p{font-size:15px;line-height:1.95;color:var(--muted-dark);margin-bottom:20px;max-width:640px;}
+  .origem p:last-child{margin-bottom:0;}
+  .origem .destaque{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.8;color:var(--gold-deep);border-left:2px solid var(--gold);padding-left:24px;margin-top:34px;}
+
+  .selos{padding:calc(var(--sec) * .84) 0;text-align:center;}
+  .selos .lead{font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-light);margin-bottom:54px;}
+  .selo-grid{display:flex;justify-content:center;gap:46px;flex-wrap:wrap;}
+  .selo{width:150px;display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0.9;transition:opacity .25s, transform .25s;}
+  .selo:hover{opacity:1;transform:translateY(-3px);}
+  .selo svg{width:60px;height:60px;}
+  .selo{color:var(--gold);}
+  .selo .name{font-size:12px;color:var(--bone);letter-spacing:0.02em;line-height:1.5;}
+  .selo .role{font-size:10.5px;color:var(--muted);letter-spacing:0.04em;margin-top:2px;}
+  .selo:hover{color:var(--gold-light);}
+
+  /* SISTEMAS — faixa discreta antes do acesso */
+  .sistemas{padding:calc(var(--sec) * .8) 0;text-align:center;}
+  .sistemas .kicker{text-align:center;}
+  .sistemas-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+                 border-top:1px solid var(--line);border-left:1px solid var(--line);text-align:left;margin-top:8px;}
+  .sis{display:block;background:var(--royal-3);padding:44px 40px 46px;transition:background .3s var(--ease);}
+  .sis:hover{background:var(--royal);}
+  .sis h3{font-family:var(--serif);font-size:27px;font-weight:400;color:var(--bone);}
+  .sis-tag{font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);margin:10px 0 20px;}
+  .sis p{font-size:14.5px;line-height:1.85;color:var(--muted);margin-bottom:26px;}
+  .sis-go{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-light);}
+  .sistemas-links{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;font-family:var(--serif);font-style:italic;font-size:19px;letter-spacing:0.01em;color:var(--bone);}
+  .sistemas-links a:hover{color:var(--gold-light);}
+
+  /* VISTA — segunda quebra fotográfica full-bleed */
+  .vista{
+    position:relative;height:56vh;min-height:380px;max-height:560px;
+    background-color:var(--royal-3);
+    background-image:
+      linear-gradient(180deg, rgba(10,25,67,0.15) 0%, rgba(10,25,67,0.86) 100%),
+      url('assets/vista-operacional.jpg');
+    background-size:cover;background-position:center;
+  }
+  .vista .wrap{height:100%;display:flex;align-items:flex-end;padding-bottom:50px;}
+  .vista .cap{max-width:480px;}
+  .vista .tag{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:10px;}
+  .vista h3{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--bone);line-height:1.4;}
+
+  .cenario{padding:calc(var(--sec) * 1.08) 0;}
+  .cenario-grid{display:grid;grid-template-columns:1fr 0.9fr;gap:64px;align-items:center;}
+  .cenario h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.4;color:var(--charcoal);margin:24px 0 34px;}
+  .cenario p{font-size:15px;line-height:1.95;color:var(--muted-dark);margin-bottom:20px;}
+  .cenario .signature{margin-top:38px;font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:14.5px;}
+  .photo-detail{
+    position:relative;aspect-ratio:4/3;border:1px solid var(--gold);
+    background-color:var(--royal-2);
+    background-image:linear-gradient(0deg, rgba(8,21,51,0.55) 0%, rgba(8,21,51,0) 35%), url('assets/demo-day-detalhe.jpg');
+    background-size:cover;background-position:center;
+    display:flex;align-items:flex-end;padding:22px;
+  }
+  .photo-detail::before{content:"";position:absolute;inset:10px;border:1px solid rgba(201,162,39,0.3);pointer-events:none;}
+  .photo-detail .cap{position:relative;font-size:11px;letter-spacing:0.04em;color:var(--bone);line-height:1.6;font-style:italic;background:rgba(10,25,67,0.65);padding:8px 10px;}
+
+  .imprensa{padding:var(--sec) 0;}
+  .press-list{display:flex;flex-direction:column;}
+  .press-item{padding:30px 8px;display:grid;grid-template-columns:120px 1fr auto;gap:28px;align-items:center;border-bottom:1px solid var(--line);}
+  .press-item .pdate{font-size:12px;color:var(--gold-light);letter-spacing:0.06em;}
+  .press-item .ptitle{font-family:var(--serif);font-size:17px;color:var(--bone);line-height:1.4;}
+  .press-item .psource{font-size:11.5px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:6px;}
+  .press-item .parrow{font-size:12px;color:var(--gold-light);letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;}
+  .press-item:hover .ptitle{color:var(--gold-light);}
+
+  .compromisso{padding:var(--sec) 0;}
+  .compromisso-grid{display:grid;grid-template-columns:260px 1fr;gap:70px;align-items:start;}
+  .compromisso h2{font-family:var(--serif);font-size:30px;font-weight:400;line-height:1.45;margin-bottom:26px;max-width:620px;}
+  .compromisso p{font-size:14.5px;line-height:1.9;color:var(--muted);margin-bottom:18px;max-width:620px;}
+  .compromisso p:last-child{margin-bottom:0;}
+
+  .acesso{padding:calc(var(--sec) * 1.15) 0;background:var(--bone);}
+  .acesso .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .acesso h2{font-family:var(--serif);font-weight:400;font-size:37px;line-height:1.3;color:var(--charcoal);letter-spacing:-0.005em;}
+  .acesso p{font-size:14.5px;line-height:1.9;color:var(--muted-dark);margin-top:22px;max-width:420px;}
+  .form-box{border:1px solid var(--line-dark);padding:44px;background:#FFFFFF;}
+  .form-box .flabel{font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-dark);display:block;margin-bottom:8px;}
+  .form-box .field{margin-bottom:26px;}
+  .form-box input, .form-box select{width:100%;border:none;border-bottom:1px solid var(--line-dark);background:transparent;padding:10px 0;font-size:15px;font-family:var(--sans);color:var(--charcoal);transition:border-color .25s;}
+  .form-box input:focus, .form-box select:focus{outline:none;border-color:var(--gold-deep);}
+  .form-box .submit{margin-top:10px;background:var(--royal);color:var(--bone);border:none;padding:16px 30px;font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background .25s, transform .25s;}
+  .form-box .submit:hover{background:var(--royal-2);transform:translateY(-2px);}
+
+  footer{padding:60px 0;border-top:1px solid var(--line);background:var(--royal-3);}
+  footer .grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;}
+  footer .wordmark{font-size:15px;}
+  footer .lema{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-light);margin-bottom:14px;max-width:420px;line-height:1.5;}
+  footer .legal{font-size:12px;color:#8894BE;line-height:1.8;max-width:420px;}
+  footer .cols{display:flex;gap:60px;}
+  footer .col h4{font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;}
+  footer .col a{display:block;font-size:13px;color:var(--muted);margin-bottom:10px;}
+  footer .col a:hover{color:var(--bone);}
+
+  /* ===== LIGHT SECTION OVERRIDES ===== */
+  section.light{background:var(--bone);}
+  section.light .kicker,
+  section.light .label-col,
+  section.light .lead,
+  section.light .tag{color:var(--gold-deep);}
+  section.light h1, section.light h2, section.light h3, section.light h4,
+  section.light blockquote{color:var(--charcoal);}
+  section.light p,
+  section.light .attribution{color:var(--muted-dark);}
+  section.light .press-item{border-bottom-color:var(--line-dark);}
+  section.light .press-item .pdate,
+  section.light .press-item .parrow{color:var(--gold-deep);}
+  section.light .press-item .ptitle{color:var(--charcoal);}
+  section.light .press-item .psource{color:var(--muted-dark);}
+  section.light .press-item:hover .ptitle{color:var(--gold-deep);}
+
+  @media (max-width:900px){
+    :root{--sec:78px;}
+    .wrap{padding:0 24px;}
+    .hero h1{font-size:38px;}
+    .philosophy .grid,.acesso .grid,.cenario-grid,.compromisso-grid,.origem{grid-template-columns:1fr;gap:32px;}
+    .cap-grid,.dom-grid{grid-template-columns:1fr;gap:1px;}
+    .dom-grid{gap:34px;}
+    .cap-item{padding:34px 28px 38px;}
+    .navlinks{display:none;}
+    .burger{display:block;}
+    .idx-head{flex-wrap:wrap;}
+    .idx-head .spacer{display:none;}
+    .idx-head .sub{text-align:left;max-width:100%;}
+    .press-item{grid-template-columns:1fr;gap:8px;}
+    .manifesto{padding:80px 0;}
+    .manifesto blockquote{font-size:25px;}
+    .sistemas-links{flex-direction:column;gap:22px;}
+    .sistemas-grid{grid-template-columns:1fr;}
+    .sis{padding:32px 26px 36px;}
+    .vista{height:44vh;}
+
+    #nav-toggle:checked ~ .mobile-panel{
+      display:flex;position:fixed;inset:0;z-index:60;background:var(--royal-3);
+      flex-direction:column;align-items:center;justify-content:center;gap:34px;
+    }
+    #nav-toggle:checked ~ .mobile-panel a{font-family:var(--serif);font-size:22px;color:var(--bone);}
+    #nav-toggle:checked ~ header .burger span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+    #nav-toggle:checked ~ header .burger span:nth-child(2){opacity:0;}
+    #nav-toggle:checked ~ header .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+  }
+
+  /* ============================================================
+     CAMADA DE ACABAMENTO
+     Acessibilidade, tipografia fina, impressão e tolerância a falha.
+     Adicionada na v17 — nada aqui é decorativo.
+     ============================================================ */
+
+  /* --- Tipografia fina --- */
+  html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+  body{text-rendering:optimizeLegibility;font-synthesis-weight:none;}
+  h2,h3,h4,blockquote,.lede,.cta-final h2{text-wrap:balance;}
+  p{text-wrap:pretty;}
+  .idx,[class*="mono"]{font-variant-numeric:tabular-nums;}
+  .hero h1,.idx-head h2,blockquote{font-optical-sizing:auto;}
+
+  /* --- Seleção de texto na cor da marca --- */
+  ::selection{background:var(--gold);color:var(--royal-3);}
+
+  /* --- Barra de rolagem --- */
+  html{scrollbar-color:#2A3A6E var(--royal-3);scrollbar-width:thin;}
+  ::-webkit-scrollbar{width:11px;height:11px;}
+  ::-webkit-scrollbar-track{background:var(--royal-3);}
+  ::-webkit-scrollbar-thumb{background:#2A3A6E;border:3px solid var(--royal-3);border-radius:8px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold-deep);}
+
+  /* --- Foco visível: sem isto, navegação por teclado é cega --- */
+  :focus-visible{outline:2px solid var(--gold-light);outline-offset:3px;}
+  section.light :focus-visible,.cta-final :focus-visible{outline-color:var(--gold-deep);}
+  :focus:not(:focus-visible){outline:none;}
+
+  /* --- Pular para o conteúdo (leitores de tela / teclado) --- */
+  .skip{position:fixed;left:-9999px;top:12px;z-index:200;background:var(--gold);color:var(--royal-3);
+        padding:14px 24px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;}
+  .skip:focus{left:12px;}
+
+  /* --- Âncoras não param debaixo do cabeçalho fixo --- */
+  [id]{scroll-margin-top:104px;}
+
+  /* --- Sem JavaScript, nada desaparece. O padrão é visível. --- */
+  .reveal{opacity:1;transform:none;}
+  .js .reveal{opacity:0;transform:translateY(18px);}
+  .js .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* --- Movimento reduzido: preferência do sistema é respeitada --- */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+                         transition-duration:.01ms!important;scroll-behavior:auto!important;}
+    .js .reveal{opacity:1!important;transform:none!important;}
+  }
+
+  /* --- Impressão: material institucional acaba em PDF de compras ---
+     (a lista de seletores abaixo é compartilhada entre index e rotaviva;
+      classes ausentes numa das páginas são ignoradas sem efeito) --- */
+  @media print{
+    *{background:transparent!important;color:#111!important;box-shadow:none!important;text-shadow:none!important;}
+    body{background:#fff!important;font-size:11pt;}
+    header,footer .cols,#progress,.mobile-panel,.burger,.navcta,.hero-actions,
+    .skip,.form-box,.sistemas,.btn-primary,.btn-ghost{display:none!important;}
+    .wrap{max-width:100%;padding:0 12mm;}
+    section{padding:14mm 0!important;page-break-inside:avoid;border:0!important;}
+    .vista,.manifesto{height:auto!important;min-height:0!important;padding:10mm 0!important;}
+    .hero{padding:0 0 10mm!important;}
+    h1,h2,h3{page-break-after:avoid;}
+    a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt;color:#555;word-break:break-all;}
+    .selo svg,.photo-detail,.produto-shot{border-color:#999!important;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<div id="progress" aria-hidden="true"></div>
+<input type="checkbox" id="nav-toggle" aria-hidden="true" tabindex="-1">
+
+<header id="site-header" role="banner">
+  <div class="wrap">
+    <nav aria-label="Navegação principal">
+      <div class="wordmark">SEBRA<span>D</span>S</div>
+      <div class="navlinks">
+        <a class="u-link" href="#fazemos">O que fazemos</a>
+        <a class="u-link" href="#atuacao">Onde atuamos</a>
+        <a class="u-link" href="#parceiros">Reconhecimento</a>
+        <a class="u-link" href="#origem">A empresa</a>
+      </div>
+      <a href="#acesso" class="navcta">Falar conosco</a>
+      <label for="nav-toggle" class="burger" role="button" tabindex="0" aria-controls="menu-mobile" aria-label="Abrir menu"><span></span><span></span><span></span></label>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-panel" id="menu-mobile">
+  <a href="#fazemos">O que fazemos</a>
+  <a href="#atuacao">Onde atuamos</a>
+  <a href="#parceiros">Reconhecimento</a>
+  <a href="#origem">A empresa</a>
+  <a href="#acesso" style="color:#E3C46B;">Falar conosco</a>
+</div>
+
+<main id="conteudo">
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engenharia de dados e sistemas de decisão · Rio de Janeiro</div>
+    <h1>O passado informa.<br>O presente confirma.<br>A decisão é <em>agora</em>.</h1>
+    <p class="lede">A SEBRADS integra registro histórico e dado em tempo real para que organizações que operam sob pressão decidam com vantagem — e possam demonstrar, depois, por que decidiram assim.</p>
+    <div class="hero-actions">
+      <a href="#acesso" class="btn-primary">Falar conosco</a>
+      <a href="#fazemos" class="btn-ghost">O que fazemos</a>
+    </div>
+  </div>
+</section>
+
+<section class="capacidades light" id="fazemos">
+  <div class="wrap">
+    <div class="idx-head"><span class="idx">01</span><h2>O que fazemos</h2><span class="spacer"></span><span class="sub">Quatro competências que operam de forma integrada em cada projeto.</span></div>
+    <div class="cap-grid">
+      <article class="cap-item reveal">
+        <div class="cn">01</div>
+        <h3>Integração de dados heterogêneos</h3>
+        <p>Séries históricas, telemetria de operação, fontes públicas e sistemas legados quase nunca conversam entre si. Nós fazemos essas camadas se encontrarem em um modelo único — sem exigir que o cliente troque o que já usa.</p>
+      </article>
+      <article class="cap-item reveal">
+        <div class="cn">02</div>
+        <h3>Modelagem preditiva aplicada</h3>
+        <p>Modelos calibrados para o território e a operação de cada cliente, não configurações genéricas. A precisão vem de entender profundamente o contexto local antes de tentar prever qualquer coisa nele.</p>
+      </article>
+      <article class="cap-item reveal">
+        <div class="cn">03</div>
+        <h3>Registro auditável de decisão</h3>
+        <p>Cada decisão apoiada pelos nossos sistemas gera um registro técnico datado e íntegro. Serve para operar melhor hoje — e para responder com precisão, amanhã, a quem tiver o direito de perguntar.</p>
+      </article>
+      <article class="cap-item reveal">
+        <div class="cn">04</div>
+        <h3>Integração à operação existente</h3>
+        <p>A camada de decisão entra no fluxo que já roda. Sem substituir sistemas, sem retrabalho para as equipes de campo e sem projeto de implantação que atravessa dois anos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto reveal">
+  <div class="wrap">
+    <div class="rule"></div>
+    <blockquote>Integramos o que já aconteceu ao que está acontecendo — para que a <em>próxima decisão</em> seja a melhor possível.</blockquote>
+    <div class="src">SEBRADS · Rio de Janeiro</div>
+  </div>
+</section>
+
+<section class="dominios light" id="atuacao">
+  <div class="wrap">
+    <div class="idx-head"><span class="idx">02</span><h2>Onde atuamos</h2><span class="spacer"></span><span class="sub">Ambientes em que uma decisão errada custa dinheiro, tempo ou segurança.</span></div>
+    <div class="dom-grid">
+      <div class="dom reveal">
+        <h4>Transporte coletivo e frotas</h4>
+        <p>Operações que precisam decidir rota, escala e prioridade em tempo real — e prestar contas dessas decisões a órgãos reguladores e contratantes.</p>
+      </div>
+      <div class="dom reveal">
+        <h4>Ativos urbanos e mídia exterior</h4>
+        <p>Inventários físicos distribuídos pela cidade, cujo valor e desempenho variam conforme condições que ninguém controla, mas que podem ser antecipadas.</p>
+      </div>
+      <div class="dom reveal">
+        <h4>Infraestrutura sob risco climático</h4>
+        <p>Ativos expostos a eventos extremos, em que antecipar uma janela de risco vale mais do que documentar o prejuízo depois que ele acontece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vista reveal">
+  <div class="wrap">
+    <div class="cap">
+      <div class="tag">Rio de Janeiro</div>
+      <h3>A cidade que nossos sistemas leem, ponto a ponto, todos os dias.</h3>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy light" id="filosofia">
+  <div class="wrap">
+    <div class="idx-head"><span class="idx">03</span><h2>Confidencialidade e dados</h2><span class="spacer"></span></div>
+    <div class="grid">
+      <div class="label-col">Política</div>
+      <div>
+        <p class="pol">Os dados de cada cliente pertencem ao cliente. A SEBRADS os trata na condição de operadora, exclusivamente para as finalidades contratadas, em conformidade com a Lei nº 13.709/2018.</p>
+        <p class="pol">Não divulgamos nomes de contratantes, não utilizamos operações reais como material de divulgação e não há acesso cruzado de informação entre contas. Cada cliente acessa somente os próprios dados.</p>
+        <p class="pol">Arquitetura, documentação técnica e resultados detalhados são apresentados em reunião, mediante acordo de confidencialidade.</p>
+        <p class="pol">Retemos titularidade apenas sobre os modelos que desenvolvemos e sobre estatísticas agregadas e anonimizadas — nunca sobre o registro individual do cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="selos" id="parceiros">
+  <div class="wrap">
+    <div class="lead">Reconhecimento institucional</div>
+    <div class="selo-grid">
+      <a class="selo reveal" href="https://desafio.cor.rio/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2"/><circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="0.6"/><text x="32" y="29" text-anchor="middle" fill="currentColor" font-size="9" font-family="Georgia,serif">8º</text><text x="32" y="41" text-anchor="middle" fill="currentColor" font-size="7" font-family="Georgia,serif">DESAFIO COR</text></svg>
+        <div class="name">Finalista — 8º Desafio COR</div>
+        <div class="role">Fase de Aceleração, 2026</div>
+      </a>
+      <a class="selo reveal" href="https://itdpbrasil.org/8o-desafio-cor-solucao-vencedora-vai-fortalecer-a-resiliencia-do-transporte-publico-do-rio-de-janeiro-diante-de-eventos-climaticos-extremos/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2"/><path d="M32 14 L36 26 L49 26 L38 34 L42 47 L32 39 L22 47 L26 34 L15 26 L28 26 Z" stroke="currentColor" stroke-width="0.9"/></svg>
+        <div class="name">ITDP Brasil</div>
+        <div class="role">Instituto realizador</div>
+      </a>
+      <a class="selo reveal" href="https://www.international-climate-initiative.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2"/><path d="M18 38 C18 24, 46 24, 46 38" stroke="currentColor" stroke-width="1.2"/><circle cx="32" cy="30" r="5" stroke="currentColor" stroke-width="1"/></svg>
+        <div class="name">Projeto ACCESS / IKI</div>
+        <div class="role">PNUMA · Governo Alemão</div>
+      </a>
+      <a class="selo reveal" href="https://akcit.ufg.br/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2"/><rect x="21" y="21" width="22" height="22" stroke="currentColor" stroke-width="1"/><line x1="21" y1="32" x2="43" y2="32" stroke="currentColor" stroke-width="0.7"/><line x1="32" y1="21" x2="32" y2="43" stroke="currentColor" stroke-width="0.7"/></svg>
+        <div class="name">AKCIT</div>
+        <div class="role">Orientação estratégica</div>
+      </a>
+      <a class="selo reveal" href="https://cor.rio/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.2"/><path d="M20 40 L26 26 L32 36 L38 22 L44 40" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+        <div class="name">COR-Rio</div>
+        <div class="role">Programa realizador, 2026</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cenario light" id="cenario">
+  <div class="wrap cenario-grid">
+    <div>
+      <div class="kicker">Avaliação independente</div>
+      <h2>Arquitetura e resultados submetidos a banca técnica externa.</h2>
+      <p>O 8º Desafio COR reuniu oito equipes para desenvolver soluções de resiliência climática para o transporte público do Rio de Janeiro, em programa do Centro de Operações e Resiliência com a SMTR e o ITDP Brasil. A SEBRADS chegou à final.</p>
+      <p>A avaliação cobriu arquitetura, modelo de dados e resultados operacionais, diante de banca formada por técnicos do poder público e do setor de mobilidade.</p>
+      <div class="signature">— final do 8º Desafio COR, junho de 2026</div>
+    </div>
+    <div class="photo-detail reveal">
+      <div class="cap">Apresentação na final do VIII Desafio COR</div>
+    </div>
+  </div>
+</section>
+
+<section class="imprensa" id="imprensa">
+  <div class="wrap">
+    <div class="idx-head"><span class="idx">04</span><h2>Imprensa</h2><span class="spacer"></span><span class="sub">Cobertura de fontes institucionais — cada linha leva à matéria original.</span></div>
+    <div class="press-list">
+      <a class="press-item reveal" href="https://cor.rio/desafio-cor-projetos-de-inovacao-em-mobilidade-ganham-incentivo-de-r-10-mil-para-desenvolver-ideias/" target="_blank" rel="noopener">
+        <div class="pdate">26 mar 2026</div>
+        <div>
+          <div class="ptitle">Desafio COR: projetos de inovação em mobilidade ganham incentivo de R$10 mil para desenvolver ideias</div>
+          <div class="psource">Centro de Operações e Resiliência — COR-Rio</div>
+        </div>
+        <div class="parrow">Ler matéria ↗</div>
+      </a>
+      <a class="press-item reveal" href="https://itdpbrasil.org/8o-desafio-cor-solucao-vencedora-vai-fortalecer-a-resiliencia-do-transporte-publico-do-rio-de-janeiro-diante-de-eventos-climaticos-extremos/" target="_blank" rel="noopener">
+        <div class="pdate">17 jun 2026</div>
+        <div>
+          <div class="ptitle">8º Desafio COR: solução vencedora vai fortalecer a resiliência do transporte público do Rio de Janeiro</div>
+          <div class="psource">ITDP Brasil</div>
+        </div>
+        <div class="parrow">Ler matéria ↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="historia light" id="origem">
+  <div class="wrap">
+    <div class="idx-head"><span class="idx">05</span><h2>A empresa</h2><span class="spacer"></span></div>
+    <div class="origem">
+      <div class="label-col">Perfil</div>
+      <div>
+        <p>A SEBRADS é uma empresa de engenharia de dados sediada no Rio de Janeiro. Desenvolve e opera sistemas próprios de decisão, mantidos em produção pela própria equipe — não licencia tecnologia de terceiros nem terceiriza a operação do que entrega.</p>
+        <p>A companhia foi constituída em 2026 e atua sobre a malha urbana do Rio de Janeiro, com estrutura preparada para replicar os mesmos sistemas em outras regiões metropolitanas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compromisso">
+  <div class="wrap compromisso-grid">
+    <div class="label-col" style="color:var(--gold-light);">Compromisso</div>
+    <div>
+      <h2>Quem constrói reflete quem é servido.</h2>
+      <p>A equipe da SEBRADS foi formada deliberadamente para se parecer com o Rio de Janeiro plural em que nossos sistemas operam. Quem conhece o território de dentro faz perguntas melhores sobre ele — e essas perguntas entram no produto.</p>
+      <p>O impacto do que construímos recai, de forma desproporcional, sobre quem tem menos margem para absorver uma falha: o passageiro que perde o turno, o motorista que responde sozinho, o bairro que alaga primeiro. Confiabilidade é, por isso, o critério que define quando damos um sistema por pronto.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sistemas">
+  <div class="wrap">
+    <div class="kicker">Nossos sistemas</div>
+    <div class="sistemas-grid">
+      <a class="sis reveal" href="rotaviva.html">
+        <h3>RotaViva</h3>
+        <div class="sis-tag">Transporte coletivo e frotas</div>
+        <p>Antecipa onde a malha viária vai travar, orienta a decisão de rota em tempo real e registra cada decisão em documento técnico auditável.</p>
+        <span class="sis-go">Conhecer o RotaViva ↗</span>
+      </a>
+      <a class="sis reveal" href="https://powervizion.com/" target="_blank" rel="noopener">
+        <h3>PowerVizion</h3>
+        <div class="sis-tag">Ativos urbanos e mídia exterior</div>
+        <p>Camada de decisão para inventários físicos distribuídos pela cidade, cujo desempenho varia com condições que podem ser antecipadas.</p>
+        <span class="sis-go">Acessar o site ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="acesso" id="acesso">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h2>Vamos entender a sua operação.</h2>
+        <p>Se você opera frotas, ativos urbanos ou infraestrutura exposta a risco climático — ou representa um parceiro institucional, fundo ou grupo segurador — escreva para o nosso time.</p>
+        <p>A primeira conversa é técnica e sem compromisso: entendemos o seu contexto, mostramos o sistema rodando e avaliamos em conjunto se há aderência entre o seu problema e o que construímos.</p>
+      </div>
+      <form class="form-box" id="acesso-form" aria-label="Formulário de contato">
+        <div class="field"><label class="flabel" for="f-nome">Nome</label><input type="text" id="f-nome" autocomplete="name" placeholder="Seu nome completo" required></div>
+        <div class="field"><label class="flabel" for="f-org">Organização</label><input type="text" id="f-org" autocomplete="organization" placeholder="Empresa, consórcio ou instituição" required></div>
+        <div class="field">
+          <label class="flabel" for="f-interesse">Natureza do interesse</label>
+          <select id="f-interesse">
+            <option>Operação de transporte / frota</option>
+            <option>Mídia e ativos urbanos (OOH)</option>
+            <option>Seguradora / gestão de risco</option>
+            <option>Parceria institucional / fundo</option>
+            <option>Imprensa</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field"><label class="flabel" for="f-email">E-mail</label><input type="email" id="f-email" autocomplete="email" placeholder="voce@organizacao.com" required></div>
+        <button type="submit" class="submit">Enviar</button>
+        <p id="acesso-status" role="status" aria-live="polite" style="margin-top:16px;font-size:12.5px;color:var(--muted-dark);display:none;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="wordmark" style="margin-bottom:16px;">SEBRA<span>D</span>S</div>
+        <p class="lema">Integramos o que já aconteceu ao que está acontecendo.</p>
+        <p class="legal">SEBRADS — Serviço Brasileiro de Arquitetura e Design de Software Ltda.<br>Rio de Janeiro, Brasil. Finalista do 8º Desafio COR, 2026.</p>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <h4>Sistemas</h4>
+          <a href="rotaviva.html">RotaViva ↗</a>
+          <a href="https://powervizion.com/" target="_blank" rel="noopener">PowerVizion ↗</a>
+        </div>
+        <div class="col">
+          <h4>Institucional</h4>
+          <a href="#fazemos">O que fazemos</a>
+          <a href="#atuacao">Onde atuamos</a>
+          <a href="#filosofia">Como nos relacionamos</a>
+          <a href="#parceiros">Reconhecimento</a>
+          <a href="#imprensa">Imprensa</a>
+          <a href="#origem">A empresa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  'use strict';
+  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Revelação ao rolar, com escalonamento entre irmãos da mesma seção.
+  // Se algo aqui falhar, o CSS já deixa tudo visível por padrão.
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (reduz || !('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var irmaos = [].slice.call(e.target.parentNode.children).filter(function(n){
+          return n.classList && n.classList.contains('reveal');
+        });
+        var i = Math.max(0, irmaos.indexOf(e.target));
+        e.target.style.transitionDelay = Math.min(i, 5) * 90 + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  // Barra de progresso + estado do cabeçalho, em rAF para não travar a rolagem
+  var header = document.getElementById('site-header');
+  var bar = document.getElementById('progress');
+  var pendente = false;
+  function pintar(){
+    pendente = false;
+    var y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y > 40);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+  }
+  function onScroll(){ if (!pendente) { pendente = true; requestAnimationFrame(pintar); } }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  pintar();
+
+  // Menu mobile acessível por teclado (o <label> sozinho não responde a Enter)
+  var burger = document.querySelector('.burger');
+  var toggle = document.getElementById('nav-toggle');
+  if (burger && toggle) {
+    burger.setAttribute('aria-expanded', 'false');
+    burger.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle.checked = !toggle.checked; sincronizar(); }
+    });
+    toggle.addEventListener('change', sincronizar);
+    function sincronizar(){
+      var aberto = toggle.checked;
+      burger.setAttribute('aria-expanded', String(aberto));
+      burger.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+      document.body.style.overflow = aberto ? 'hidden' : '';
+    }
+    document.querySelectorAll('.mobile-panel a').forEach(function(a){
+      a.addEventListener('click', function(){ toggle.checked = false; sincronizar(); });
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && toggle.checked) { toggle.checked = false; sincronizar(); burger.focus(); }
+    });
+  }
+
+  // Envio por cliente de e-mail
+  var acessoForm = document.getElementById('acesso-form');
+  if (acessoForm) {
+    acessoForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var nome = document.getElementById('f-nome').value.trim();
+      var org = document.getElementById('f-org').value.trim();
+      var interesse = document.getElementById('f-interesse').value;
+      var email = document.getElementById('f-email').value.trim();
+      var status = document.getElementById('acesso-status');
+      if (!nome || !org || !email) {
+        status.style.display = 'block';
+        status.style.color = '#8C2F2F';
+        status.textContent = 'Preencha nome, organização e e-mail antes de enviar.';
+        return;
+      }
+      // Endereço montado em tempo de execução (anti-coleta de spam).
+      var dest = ['davilucas.sbdasilva.ismart','gmail','com'];
+      var destino = dest[0] + String.fromCharCode(64) + dest[1] + '.' + dest[2];
+      var subject = 'Solicitação de conversa — ' + org;
+      var body = 'Nome: ' + nome + '\nOrganização: ' + org + '\nNatureza do interesse: ' + interesse + '\nE-mail para retorno: ' + email;
+      var mailto = 'mailto:' + destino + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      window.location.href = mailto;
+      status.style.display = 'block';
+      status.style.color = 'var(--muted-dark)';
+      status.textContent = 'Abrindo seu aplicativo de e-mail para concluir o envio. Se nada acontecer, escreva para ' + destino + '.';
+    });
+  }
+</script>
+
+</body>
+</html>

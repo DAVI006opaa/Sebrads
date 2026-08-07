@@ -1,0 +1,8 @@
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="180" fill="#0A1943"/>
+  <circle cx="90" cy="90" r="76" fill="#0A1943" stroke="#C9A227" stroke-width="1.6"/>
+  <circle cx="90" cy="90" r="70" fill="none" stroke="#C9A227" stroke-width="0.5" opacity="0.55"/>
+  <text x="90" y="124" font-family="Fraunces, Georgia, 'Iowan Old Style', serif" font-style="italic" font-weight="500" font-size="96" fill="#E3C46B" text-anchor="middle">S</text>
+  <text x="200" y="104" font-family="Fraunces, Georgia, 'Iowan Old Style', serif" font-weight="400" font-size="52" letter-spacing="7" fill="#F7F3EA">SEBRA<tspan fill="#C9A227">D</tspan>S</text>
+  <text x="200" y="134" font-family="-apple-system, Helvetica, Arial, sans-serif" font-weight="400" font-size="13" letter-spacing="2.6" fill="#9BA2BE">ENGENHARIA DE DADOS E SISTEMAS DE DECISÃO</text>
+</svg>
